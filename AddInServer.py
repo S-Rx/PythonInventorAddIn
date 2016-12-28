@@ -34,8 +34,7 @@ class AddInServer(module.ApplicationAddInServer):
     _reg_progid_ = "Python.InventorAddIn"
     _reg_clsid_ = "{0445899D-ED0A-4966-82B3-BF2E960BC6E4}"  # This guid should be unique
     _reg_catids_ = ["{39AD2B5C-7A29-11D6-8E0A-0010B541CAA8}", ]
-    _reg_options_ = {"Settings": ""}
-    _settings_ = {"Hidden": "1", "UserUnloadable": "0", "LoadOnStartUp": "1"}
+
     m_inventorApplication = None
 
     def __init__(self):
