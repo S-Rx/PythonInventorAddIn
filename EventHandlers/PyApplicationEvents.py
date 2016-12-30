@@ -14,9 +14,6 @@
 import win32gui
 
 
-__author__ = 'Ханин'
-
-
 class ApplicationEvents(object):
 
     def OnActivateDocument(self, DocumentObject, BeforeOrAfter, Context, HandlingCode):
@@ -65,7 +62,7 @@ class ApplicationEvents(object):
         pass
 
     def OnOpenDocument(self, DocumentObject, FullDocumentName, BeforeOrAfter, Context, HandlingCode):
-        pass
+        win32gui.MessageBox(None, u"OnOpenDocument call", u"OK", 0)
 
     def  OnQuit(self, BeforeOrAfter, Context, HandlingCode):
         pass

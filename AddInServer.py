@@ -11,19 +11,17 @@
 # Copyright:   (c) S.Hanin 2016
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
+
 import win32gui
 import logging
 
-import win32com.client.gencache as gencache
+from win32com.client import gencache
 from win32com.client import Dispatch, DispatchWithEvents
-import win32con
-import win32com
 
 from EventHandlers import PyApplicationEvents
 
-module = gencache.GetModuleForTypelib("{D98A091D-3A0F-4C3E-B36E-61F62068D488}", 0, 1, 0)
 
-__author__ = 'Ханин'
+module = gencache.GetModuleForTypelib("{D98A091D-3A0F-4C3E-B36E-61F62068D488}", 0, 1, 0)
 
 logger = logging.getLogger("AddInServer")
 logger.setLevel(logging.WARNING)
@@ -64,7 +62,7 @@ class AddInServer(module.ApplicationAddInServer):
                                                                  PyApplicationEvents.ApplicationEvents)
             win32gui.MessageBox(None, u"LOAD OK", u"OK", 0)
         except Exception as err:
-            win32gui.MessageBox(None, u"Error while loading Python.InventorAddIn^ %s" % err, u"ERROR", 0)
+            win32gui.MessageBox(None, u"Error while loading Python.InventorAddIn %s" % err, u"ERROR", 0)
 
     def Deactivate(self):
         self.m_inventorApplication = None
@@ -94,6 +92,8 @@ class AddInServer(module.ApplicationAddInServer):
 
 def main():
     import sys
+    import win32con
+    import win32com
     import win32com.server.register
     win32com.server.register.UseCommandLine(AddInServer)
     if "--register" in sys.argv:
