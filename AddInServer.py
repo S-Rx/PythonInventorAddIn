@@ -11,12 +11,15 @@
 # Copyright:   (c) S.Hanin 2016
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
-import win32com.client.gencache as gencache
-
-import win32con
-import win32com
 import win32gui
 import logging
+
+import win32com.client.gencache as gencache
+from win32com.client import Dispatch, DispatchWithEvents
+import win32con
+import win32com
+
+from EventHandlers import PyApplicationEvents
 
 module = gencache.GetModuleForTypelib("{D98A091D-3A0F-4C3E-B36E-61F62068D488}", 0, 1, 0)
 
@@ -36,6 +39,7 @@ class AddInServer(module.ApplicationAddInServer):
     _reg_catids_ = ["{39AD2B5C-7A29-11D6-8E0A-0010B541CAA8}", ]
 
     m_inventorApplication = None
+    m_ApplicationEvents = None
 
     def __init__(self):
         win32gui.MessageBox(None, u"__init__ call", u"OK", 0)  # change it to pass
@@ -53,11 +57,14 @@ class AddInServer(module.ApplicationAddInServer):
         """
 
         try:
-            AddInSiteObject = win32com.client.Dispatch(AddInSiteObject)
+            AddInSiteObject = Dispatch(AddInSiteObject)
             AddInServer.m_inventorApplication = AddInSiteObject.Application
+
+            AddInServer.m_ApplicationEvents = DispatchWithEvents(AddInSiteObject.Application.ApplicationEvents,
+                                                                 PyApplicationEvents.ApplicationEvents)
             win32gui.MessageBox(None, u"LOAD OK", u"OK", 0)
         except Exception as err:
-            win32gui.MessageBox(None, u"Error while loading Python.InventorAddIn", u"ERROR", 0)
+            win32gui.MessageBox(None, u"Error while loading Python.InventorAddIn^ %s" % err, u"ERROR", 0)
 
     def Deactivate(self):
         self.m_inventorApplication = None
