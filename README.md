@@ -1,6 +1,6 @@
 # PythonInventorAddIn
 
-Inventor 2010 COM AddIn writen in python 2.7 with pywin32.
+Autodesk Inventor 2010 COM AddIn writen in python 2.7 with pywin32.
 
 How to make it work:
 
