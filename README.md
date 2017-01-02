@@ -1,6 +1,8 @@
 # PythonInventorAddIn
 
 Autodesk Inventor 2010 COM AddIn writen in python 2.7 with pywin32.
+Inventor 2012 also supported and maybe an older versions.
+Important: Use 32-bit python with 32-bit Inventor and 64-bit ... with 64-bit ...
 
 How to make it work:
 
