@@ -16,10 +16,8 @@ import win32gui
 import logging
 
 from win32com.client import gencache
-from win32com.client import Dispatch, DispatchWithEvents
 
-from EventHandlers import PyApplicationEvents
-
+from AddIn import AddIn
 
 module = gencache.GetModuleForTypelib("{D98A091D-3A0F-4C3E-B36E-61F62068D488}", 0, 1, 0)
 
@@ -40,7 +38,8 @@ class AddInServer(module.ApplicationAddInServer):
     m_ApplicationEvents = None
 
     def __init__(self):
-        win32gui.MessageBox(None, u"__init__ call", u"OK", 0)  # change it to pass
+        # win32gui.MessageBox(None, u"__init__ call", u"OK", 0)  # change it to pass
+        pass
 
     def Activate(self, AddInSiteObject, firstTime):
         """
@@ -55,12 +54,12 @@ class AddInServer(module.ApplicationAddInServer):
         """
 
         try:
-            AddInSiteObject = Dispatch(AddInSiteObject)
-            AddInServer.m_inventorApplication = AddInSiteObject.Application
+            addIn_app = AddIn(AddInSiteObject)
 
-            AddInServer.m_ApplicationEvents = DispatchWithEvents(AddInSiteObject.Application.ApplicationEvents,
-                                                                 PyApplicationEvents.ApplicationEvents)
-            win32gui.MessageBox(None, u"LOAD OK", u"OK", 0)
+            if firstTime:
+                addIn_app.create_ui()
+
+                # win32gui.MessageBox(None, u"LOAD OK", u"OK", 0)
         except Exception as err:
             win32gui.MessageBox(None, u"Error while loading Python.InventorAddIn %s" % err, u"ERROR", 0)
 

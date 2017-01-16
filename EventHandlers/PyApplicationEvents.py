@@ -11,7 +11,6 @@
 # Copyright:   (c) S.Hanin 2016
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
-import win32gui
 
 
 class ApplicationEvents(object):
@@ -62,13 +61,15 @@ class ApplicationEvents(object):
         pass
 
     def OnOpenDocument(self, DocumentObject, FullDocumentName, BeforeOrAfter, Context, HandlingCode):
-        win32gui.MessageBox(None, u"OnOpenDocument call", u"OK", 0)
+        pass
+        # win32gui.MessageBox(None, u"OnOpenDocument call", u"OK", 0)
 
     def  OnQuit(self, BeforeOrAfter, Context, HandlingCode):
         pass
 
     def OnReady(self, BeforeOrAfter, Context, HandlingCode):
-        win32gui.MessageBox(None, u"OnReady call", u"OK", 0)
+        pass
+        #win32gui.MessageBox(None, u"OnReady call", u"OK", 0)
 
     def OnRestart32BitHost(self, BeforeOrAfter, Context, HandlingCode):
         pass
